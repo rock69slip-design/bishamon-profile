@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>びしゃもん | プロフィールカード</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #2c5364, #0f2027);
+      background-size: 400% 400%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow: hidden;
+      animation: gradientMove 15s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 🌟 星 */
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    /* 🌠 流れ星 */
+    .shooting-star {
+      position: absolute;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, white, transparent);
+      opacity: 0;
+      transform: rotate(45deg);
+      animation: shoot 3s linear infinite;
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translate(-150px, -150px) rotate(45deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      50% {
+        transform: translate(150px, 150px) rotate(45deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(300px, 300px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* カード本体 */
+    .card {
+      background: #5a3ea6;
+      color: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      text-align: center;
+      width: 340px;
+      max-width: 100%;
+      z-index: 1;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.3s ease, color 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 16px;
+      border: 4px solid #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    /* スキル */
+    .skills {
+      margin-top: 16px;
+      text-align: left;
+    }
+
+    .skills h2 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 4px;
+    }
+
+    .skills ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .skills li {
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 16px 0;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: #fff;
+      background: #1e7e34;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.15s ease, transform 0.12s ease;
+    }
+
+    .btn:hover {
+      background: #155724;
+      transform: translateY(-2px);
+    }
+
+    .btn-instagram {
+      background: linear-gradient(45deg, #fd1d1d, #fcb045);
+    }
+    .btn-instagram:hover {
+      background: linear-gradient(45deg, #c31432, #ff512f);
+    }
+
+    /* ダークモード */
+    body.dark {
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      background-size: 400% 400%;
+      animation: gradientMove 20s ease infinite;
+    }
+    body.dark .card {
+      background: #333;
+      color: #f0f0f0;
+    }
+    body.dark .btn {
+      background: #444;
+    }
+    body.dark .btn:hover {
+      background: #222;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .links {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .btn {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="https://placekitten.com/200/200" alt="プロフィール写真" class="profile-img">
+    <h1>びしゃもん</h1>
+    <p>1995年9月17日生まれ。三重県出身。<br>
+       身長177cm 体重67kg。<br>
+       現在プログラミングを勉強中。</p>
+
+    <div class="skills">
+      <h2>スキル</h2>
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+      </ul>
+    </div>
+
+    <div class="links">
+      <a href="https://instagram.com/" class="btn btn-instagram" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+    </div>
+
+    <button id="toggle-mode" class="btn">🌙 Dark Mode</button>
+  </div>
+
+  <script>
+    // ダークモード切り替え
+    const toggleBtn = document.getElementById("toggle-mode");
+    const body = document.body;
+
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      toggleBtn.textContent = body.classList.contains("dark")
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
+    });
+
+    // 🌟 星を100個ランダム配置
+    const starCount = 100;
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.animationDelay = Math.random() * 3 + "s";
+      const size = Math.random() * 2 + 1;
+      star.style.width = size + "px";
+      star.style.height = size + "px";
+      document.body.appendChild(star);
+    }
+
+    // 🌠 流れ星を3つ配置
+    const shootingStarCount = 3;
+    for (let i = 0; i < shootingStarCount; i++) {
+      const s = document.createElement("div");
+      s.classList.add("shooting-star");
+      s.style.top = Math.random() * 80 + "%";
+      s.style.left = Math.random() * 80 + "%";
+      s.style.animationDelay = Math.random() * 10 + "s";
+      document.body.appendChild(s);
+    }
+  </script>
+</body>
+</html>
